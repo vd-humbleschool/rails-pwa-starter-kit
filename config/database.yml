@@ -23,16 +23,22 @@ default: &default
 
 development:
   <<: *default
-  database: rails-pwa-starter-kit_development
+  database: rpsk-dev
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: rails-pwa-starter-kit
+  #
+  # MY NOTE: Uncommented, since our machine requires an explicit username. If
+  # yours does not, then comment it out.
+  username: postgres
 
   # The password associated with the postgres role (username).
-  #password:
+  #
+  # MY NOTE: Uncommented, since our machine requires an explicit password. If
+  # yours does not, then comment it out.
+  password: postgres
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -57,14 +63,19 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rails-pwa-starter-kit_test
+  database: rpsk-test
+
+  # MY NOTE: Added these. See `development` section above
+  username: postgres
+  password: postgres
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
 #
 # Instead, provide the password as a unix environment variable when you boot
-# the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
+# the app. Read
+# http://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full rundown on how to provide these environment variables in a
 # production deployment.
 #
@@ -78,8 +89,12 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+# MY NOTE: This section is overridden by Heroku, but could be required in other
+# deployment scenarios
 production:
   <<: *default
-  database: rails-pwa-starter-kit_production
-  username: rails-pwa-starter-kit
-  password: <%= ENV['RAILS-PWA-STARTER-KIT_DATABASE_PASSWORD'] %>
+  database: rpsk
+
+  # MY NOTE: Safely remove these if you don't plan on using them
+  username: rpsk-admin
+  password: <%= ENV['RPSK_DATABASE_PASSWORD'] %>
