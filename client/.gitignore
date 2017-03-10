@@ -16,3 +16,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# MY NOTE: Everything below this line is added by us
+
+# Ignore all versions of `.env`, not just the standard one. We use multiple
+# versions: The standard `.env` for development; and specialized `.env.XXX`
+# files for different production scenarios. For details, see the README.
+.env.*

@@ -5,7 +5,9 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
-# MY NOTE: Uncommented this block to allow CORS
+# MY NOTE: Uncommented this block to allow CORS. Also, modified the `origins`
+# call below to allow access only to the client app, the URL of which can be
+# provided via `config/secrets.yml`.
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins Rails.application.secrets.client_app_base_url

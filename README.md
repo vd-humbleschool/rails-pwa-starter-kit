@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the README for the Rails API backing the React client app.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The client app code resides in the `/client` folder. Though it forms a part of
+this project, it is very much a standalone app. The contents of the folder can
+easily be copied elsewhere and developed separately with no consequences.
