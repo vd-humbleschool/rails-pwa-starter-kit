@@ -24,7 +24,7 @@ built app gets the environment values defined in the `.env` file, which is
 exactly what the dev server uses too! Ideally, you would like to define a
 different set of values for production. So, we provide two custom npm scripts:
 
-* `build:deploy` - This reads environment values from `'env.deploy`
+* `build:deploy` - This reads environment values from `.env.deploy`
 * `build:local` - This reads environment values from `.env.local`
 
 Why two? Well, the `deploy` script should be used to build a deployment ready

@@ -33,14 +33,71 @@
     -->
 
     <!--
-       MY NOTE: Added this script to enable service workers, a PWA requirement.
-       Taken from https://github.com/GoogleChrome/sw-precache/blob/master/demo/app/js/service-worker-registration.js
-       Apart from this script, did a few other things to enable service workers:
-       * Added the 'sw-precache' dev dependency to package.json
-       * Created the sw-precache-config.js file to tell sw-precache which files
-         should be cached, i.e. made available for the app to work offline
-       * Updated the build instructions in package.json to have sw-precache
-         generate the service worker code to cache the desired files
+      MY NOTE: Added this basic snackbar for the service worker code below to
+      inform users when the app code has been updated since they last used it.
+      Made it general, since there could be other use cases for it.
+    -->
+    <div id="root-snackbar">
+      <div class="message"><!-- Message comes here --></div>
+      <button class="dismiss" onclick="hideRootSnackbar()">DISMISS</button>
+    </div>
+    <style>
+      #root-snackbar {
+        visibility: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0,0,0,0.7);
+        color: white;
+      }
+
+      #root-snackbar.visible {
+        visibility: visible;
+      }
+
+      #root-snackbar > .message {
+        display: inline-block;
+        padding: 12px;
+      }
+
+      #root-snackbar button {
+        background: none;
+        border: none;
+        color: yellow;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      #root-snackbar button.dismiss {
+        float: right;
+        padding: 12px;
+      }
+    </style>
+    <script>
+      function showRootSnackbar(message) {
+        var snackbar = document.getElementById('root-snackbar');
+
+        snackbar.className = 'visible';
+        snackbar.firstElementChild.innerHTML = message;
+      }
+
+      function hideRootSnackbar() {
+        var snackbar = document.getElementById('root-snackbar');
+
+        snackbar.className = snackbar.className.replace('visible', '');
+      }
+    </script>
+
+    <!--
+      MY NOTE: Added this script to enable service workers, a PWA requirement.
+      Taken from https://github.com/GoogleChrome/sw-precache/blob/master/demo/app/js/service-worker-registration.js
+      Apart from this script, did a few other things to enable service workers:
+      * Added the 'sw-precache' dev dependency to package.json
+      * Created the sw-precache-config.js file to tell sw-precache which files
+        should be cached, i.e. made available for the app to work offline
+      * Updated the build instructions in package.json to have sw-precache
+        generate the service worker code to cache the desired files
      -->
     <script>
       if ('serviceWorker' in navigator) {
@@ -71,11 +128,17 @@
                           // "New content is available; please refresh." message
                           // in the page's interface.
                           console.log('New or updated content is available.');
+
+                          showRootSnackbar('The app was updated. ' +
+                              '<button onclick="window.location.reload()">Refresh</button>' +
+                              ' for latest.');
                         } else {
                           // At this point, everything has been precached.
                           // It's the perfect time to display a "Content is
                           // cached for offline use." message.
                           console.log('Content is now available offline!');
+
+                          showRootSnackbar('The app is now ready for limited offline use.');
                         }
                         break;
                       case 'redundant':
