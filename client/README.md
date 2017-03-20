@@ -43,5 +43,27 @@ So, to build a deployment ready app, do
 
 ## Step 2: Deploy the Built App
 
-Deploying can be as simple as copying the contents of the `/build` folder to an
-appropriate location from where they can be served.
+Deploying can be as simple as copying the contents of the `/build` folder over
+to an appropriate location from where they can be served.
+
+### Deploying to AWS S3 (and optionally AWS CloudFront)
+
+S3 is an option for deploying the app. We also recommend pairing it with a CDN,
+like CloudFront, for best results.
+
+You need to correctly set up your S3 bucket and CloudFront distribution first.
+See [this article](https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af)
+for help on doing so.
+
+Once set up, you can of course manually deploy. However, we provide a convenient
+shell script (`/scripts/deploy-aws.sh`) for this purpose. To use the script, you
+will need to set up AWS CLI on your machine.
+
+**IMPORTANT**: Make sure that the user signed in to the CLI has the permission
+to:
+* Upload and delete files on your S3 bucket
+* Create invalidations on your CloudFront distribution
+
+`cd` to the `/scripts` directory, and run the script as follows:
+
+    $ sh deploy-aws.sh
