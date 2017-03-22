@@ -29,16 +29,13 @@ development:
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #
-  # MY NOTE: Uncommented, since our machine requires an explicit username. If
-  # yours does not, then comment it out.
-  username: postgres
+  #username: rails-pwa-starter-kit
 
   # The password associated with the postgres role (username).
   #
   # MY NOTE: Uncommented, since our machine requires an explicit password. If
   # yours does not, then comment it out.
-  password: postgres
+  #password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have

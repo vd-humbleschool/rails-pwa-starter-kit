@@ -33,6 +33,9 @@
 .ruby-version
 .ruby-gemset
 
+# Ignore, as it is likely to contain sensitive info
+.env
+
 # Ignore all OS X specific .DS_Store files.
 # Ideally, you should ignore this globally. However, it is quite easy to forget,
 # so we include it here. Feel free to remove if you are not using OS X, or have

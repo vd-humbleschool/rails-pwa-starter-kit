@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # MY NOTE: Everything below this line is added by us
 
   resources :posts
+  resources :attachments
 end

@@ -5,65 +5,72 @@ This is the README for the React client app fronting the Rails API.
 This project was bootstrapped with
 [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Though this app code forms a part of the entire project, it is very much a
-standalone app. The contents of this folder can easily be copied elsewhere and
+Though the code in this folder forms a part of the entire project, it is very 
+much a standalone app. This folder's contents can easily be moved elsewhere and
 developed separately with no consequences.
 
-## Deployment
+## Setting Up for Development
 
-This client app is meant to be deployed separately from the backend API, on a
-static file server. Follow these steps:
+1. In a terminal window, go to the client app root folder (which is
+   `<project-root>/client` unless you move the client app elsewhere).
 
-### Step 1: Build the App
+   _NOTE: In future, take this last sentence as a precondition to be met to run
+   any client app related console commands, unless otherwise stated._
 
-Make sure you are in the `<project-root>/client` directory on your terminal.
+   Then:
+   
+       $ npm install
+       
+1. Create a `.env` file in the client app root folder, with the following 
+   environment variables:
+   
+       REACT_APP_API_BASE_URL=for-example-http://localhost:5000
 
-Next, Create React App says to run the `build` npm script, but we provide a
-slightly different approach. The problem with the standard method is that the
-built app gets the environment values defined in the `.env` file, which is
-exactly what the dev server uses too! Ideally, you would like to define a
-different set of values for production. So, we provide two custom npm scripts:
+## Building the App
 
-* `build:deploy` - This reads environment values from `.env.deploy`
-* `build:local` - This reads environment values from `.env.local`
+Create React App says to run the `build` npm script, but we provide a slightly
+different approach.
 
-Why two? Well, the `deploy` script should be used to build a deployment ready
-app. The `local` script on the other hand, should be used if you need to test
-a built app on your local machine (against a locally running backend API) via
-the `pushstate-server build` command.
+The problem with the standard `build` script is that it injects into the built
+app the environment variable values specified in the `.env` file. However, this
+is the very same file used by the **dev** server too! Ideally, we would need to 
+specify a different set of values for production.
 
-The regular `build` script still works, but you don't need to use it.
+For this, we provide a custom `build:deploy` NPM script which reads environment 
+values from `.env.deploy`.
+
+The regular `build` script still works, and can be used for running locally, to 
+test PWA features; these cannot be tested without building the app.
 
 **IMPORTANT**: Whichever build script you use, be aware that the built code gets
 generated into the same `/build` folder in each case!
 
-So, to build a deployment ready app, do
+To build a deployment ready app:
 
-    $ npm run build:deploy
+1. Create `.env.deploy` and provide desired values for environment variables
+1. `$ npm run build:deploy`
 
-## Step 2: Deploy the Built App
+## Deploying the App
 
-Deploying can be as simple as copying the contents of the `/build` folder over
-to an appropriate location from where they can be served.
-
-### Deploying to AWS S3 (and optionally AWS CloudFront)
+This client app is meant to be deployed separately from the backend API, on a
+static file server. Deploying can be as simple as copying the contents of the 
+`/build` folder to an appropriate location from where they can be served.
 
 S3 is an option for deploying the app. We also recommend pairing it with a CDN,
 like CloudFront, for best results.
 
-You need to correctly set up your S3 bucket and CloudFront distribution first.
-See [this article](https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af)
-for help on doing so.
+1. Set up your S3 bucket and CloudFront distribution first. See 
+   [this article](https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af)
+   for help on doing so.
 
-Once set up, you can of course manually deploy. However, we provide a convenient
-shell script (`/scripts/deploy-aws.sh`) for this purpose. To use the script, you
-will need to set up AWS CLI on your machine.
+1. Once set up, you can of course manually deploy. However, we provide a 
+   convenient shell script (`/scripts/deploy-aws.sh`) for this purpose. To use 
+   the script, you will need to set up AWS CLI on your machine.
 
-**IMPORTANT**: Make sure that the user signed in to the CLI has the permission
-to:
-* Upload and delete files on your S3 bucket
-* Create invalidations on your CloudFront distribution
+   **IMPORTANT**: Make sure the user signed in to the CLI has the permission to:
+     * Upload and delete files on your S3 bucket
+     * Create invalidations on your CloudFront distribution
 
-`cd` to the `/scripts` directory, and run the script as follows:
+   Then:
 
-    $ sh deploy-aws.sh
+       $ cd scripts && sh deploy-aws.sh

@@ -17,7 +17,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "targeted-build-helper": "sh -ac '. ./.env.${REACT_APP_BUILD_TARGET}; npm run build'",
-    "build:deploy": "REACT_APP_BUILD_TARGET=deploy npm run targeted-build-helper",
-    "build:local": "REACT_APP_BUILD_TARGET=local npm run targeted-build-helper"
+    "build:deploy": "REACT_APP_BUILD_TARGET=deploy npm run targeted-build-helper"
   }
 }
