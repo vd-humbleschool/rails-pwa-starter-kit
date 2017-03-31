@@ -19,7 +19,7 @@ developed separately with no consequences.
 
    Then:
    
-       $ npm install
+       $ yarn install
        
 1. Create a `.env` file in the client app root folder, with the following 
    environment variables:
@@ -28,15 +28,15 @@ developed separately with no consequences.
 
 ## Building the App
 
-Create React App says to run the `build` npm script, but we provide a slightly
-different approach.
+Create React App says to run the `build` script defined in the `package.json` 
+file, but we provide a slightly different approach.
 
 The problem with the standard `build` script is that it injects into the built
 app the environment variable values specified in the `.env` file. However, this
 is the very same file used by the **dev** server too! Ideally, we would need to 
 specify a different set of values for production.
 
-For this, we provide a custom `build:deploy` NPM script which reads environment 
+For this, we provide a custom `build:deploy` script which reads environment 
 values from `.env.deploy`.
 
 The regular `build` script still works, and can be used for running locally, to 
@@ -48,7 +48,7 @@ generated into the same `/build` folder in each case!
 To build a deployment ready app:
 
 1. Create `.env.deploy` and provide desired values for environment variables
-1. `$ npm run build:deploy`
+1. `$ yarn run build:deploy`
 
 ## Deploying the App
 

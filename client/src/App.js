@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import fetch from 'isomorphic-fetch';
+
+import theme from '../assets/react-toolbox/theme';
+import '../assets/react-toolbox/theme.css';
+import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
+
+import AppBar from 'react-toolbox/lib/app_bar/AppBar';
+import Layout from 'react-toolbox/lib/layout/Layout';
+import NavDrawer from 'react-toolbox/lib/layout/NavDrawer';
+import Panel from 'react-toolbox/lib/layout/Panel';
+import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
+
 import { apiEndpoint } from './ApiUtils';
+import './index.css';
 
 class App extends Component {
   componentDidMount() {
@@ -15,16 +24,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.<br/>
-          API location: {apiEndpoint('/')}
-        </p>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <NavDrawer>
+            <p>Navigation, account switcher, etc. go here.</p>
+          </NavDrawer>
+          <Panel>
+            <AppBar leftIcon='menu'/>
+            <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
+              <h1>Main Content</h1>
+              <p>Main content goes here.</p>
+              <DatePicker/>
+            </div>
+          </Panel>
+        </Layout>
+      </ThemeProvider>
     );
   }
 }
