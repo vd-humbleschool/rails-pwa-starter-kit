@@ -74,3 +74,11 @@ like CloudFront, for best results.
    Then:
 
        $ cd scripts && sh deploy-aws.sh
+
+## React/JSX Coding Style
+
+We follow
+[AirBnB's coding style](https://github.com/airbnb/javascript/blob/master/react/README.md),
+with the following exceptions:
+
+1. We don't use the `.jsx` extension; we stick to plain old `.js`

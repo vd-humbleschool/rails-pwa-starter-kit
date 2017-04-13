@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Posts = () => (
-  <h1>Posts</h1>
-);
+import { inject, observer } from 'mobx-react';
 
-export default Posts;
+class Posts extends Component {
+  constructor(props) {
+    super(props);
+
+    this.postsStore = props.postsStore;
+  }
+
+  componentDidMount() {
+    this.postsStore.fetchPosts();
+  }
+
+  render() {
+    return (
+      <ul>
+        {this.postsStore.posts.map((post) => (
+          <li key={`${post.id}`}>{post.id}</li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+export default inject('postsStore')(observer(Posts));
