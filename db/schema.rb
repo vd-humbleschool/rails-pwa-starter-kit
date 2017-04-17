@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322070403) do
+ActiveRecord::Schema.define(version: 20170417103956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170322070403) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "attachment_id"
+    t.string   "title",         null: false
     t.index ["attachment_id"], name: "index_posts_on_attachment_id", using: :btree
   end
 

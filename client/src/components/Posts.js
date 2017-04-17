@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 
 import { inject, observer } from 'mobx-react';
 
+import compose from 'lodash/fp/compose';
+import map from 'lodash/fp/map';
+
+import List from 'react-toolbox/lib/list/List';
+import ListItem from 'react-toolbox/lib/list/ListItem';
+
 class Posts extends Component {
   constructor(props) {
     super(props);
@@ -13,15 +19,28 @@ class Posts extends Component {
     this.postsStore.fetchPosts();
   }
 
+  postItemUi(post) {
+    return (
+      <ListItem
+        key={`${post.id}`}
+        avatar="http://mattsawyers.com/wp-content/uploads/2013/12/camera.png"
+        caption={post.title}
+      />
+    );
+  }
+
   render() {
     return (
-      <ul>
-        {this.postsStore.posts.map((post) => (
-          <li key={`${post.id}`}>{post.id}</li>
-        ))}
-      </ul>
+      <List selectable>
+        {map(this.postItemUi)(this.postsStore.posts)}
+      </List>
     );
   }
 }
 
-export default inject('postsStore')(observer(Posts));
+const hoc = compose(
+  inject('postsStore'),
+  observer
+);
+
+export default hoc(Posts);

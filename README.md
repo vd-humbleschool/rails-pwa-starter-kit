@@ -77,6 +77,7 @@ use the IDE for running and debugging:
 
 1. 'Run' menu -> Edit Configurations -> '+' -> Gem Command
 1. Enter the following:
+
    * Name: Foreman Dev
    * Gem name: foreman
    * Executable name: foreman
