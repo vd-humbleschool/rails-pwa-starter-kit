@@ -10,8 +10,8 @@ app code resides in the `/client` folder.
    files for auto-selecting the correct Ruby and gemset locally. We *strongly*
    advise this! Learn more at https://rvm.io/workflow/projects.
    
-     * `.ruby-version`
-     * `.ruby-gemset`
+   * `.ruby-version`
+   * `.ruby-gemset`
      
 1. In a terminal window, go to the project root folder. Make sure the correct
    Ruby and gemset are being used (if you did the above step, you should be ok
@@ -69,7 +69,8 @@ app (on port 3000).
       $ rails console
       
 _NOTE: Rails console will not have access to the environment variables defined
-in `.env`, so don't use it to do stuff that relies on their being available!_
+in `.env`. If you want that Rails console should have access to them, run it as
+follows: `foreman run rails console`._
 
 If you are using RubyMine, create a run configuration for the app to be able to
 use the IDE for running and debugging:
@@ -87,3 +88,24 @@ then the instructions above do not hold. Do the following instead:_
 
 1. Run the **API only** with `foreman start`
 1. Run the client app separately (see `/client/README`)
+
+## Deploying the Project
+
+The server API and the client app are meant to be deployed separately.
+
+Heroku is an option for deploying the server API.
+
+1. Deploy the app on Heroku by following the first 4 steps (until `Deploy the
+   App') outlined
+   [here](https://devcenter.heroku.com/articles/getting-started-with-ruby)
+2. Define environment variables (known as 'config vars' in Heroku):
+    
+   * All the environment variables mentioned above
+   * The following additional environment variables:
+     * `SECRET_KEY_BASE`: Use `rake secret` to generate a secret key if needed
+     * `CLIENT_APP_BASE_URLS`: The base URL(s) at which the deployed client app
+       is running. Generally, there will be just one.
+       
+_Note: If you run the Rails console on Heroku via `heroku run rails console`,
+then unlike running the console locally, it will have access to the environment
+variables (i.e. Heroku config vars) you have defined._

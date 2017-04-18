@@ -68,8 +68,8 @@ like CloudFront, for best results.
    the script, you will need to set up AWS CLI on your machine.
 
    **IMPORTANT**: Make sure the user signed in to the CLI has the permission to:
-     * Upload and delete files on your S3 bucket
-     * Create invalidations on your CloudFront distribution
+   * Upload and delete files on your S3 bucket
+   * Create invalidations on your CloudFront distribution
 
    Then:
 
