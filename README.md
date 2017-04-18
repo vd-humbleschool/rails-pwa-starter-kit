@@ -33,17 +33,14 @@ app code resides in the `/client` folder.
        
    Once fixed, run `bundle install` again.
        
-1. Install the `foreman` gem. We will need this gem to run the project, and to
-   run other `rake ...` and `rails ...` commands that rely on the existence of
-   any environment variables defined in the `.env` file below.
+1. Create development and test databases, and modify the `/config/database.yml`
+   file to suit. Then run:
    
-       $ gem install foreman
+       $ rake db:migrate
        
-1. Create a `.env` file in the project root folder, with the following 
+1. Create a `.env` file in the project root folder, with the following
    environment variables:
-
-       SECRET_KEY_BASE=your-value-here
-       CLIENT_APP_BASE_URLS=http://localhost:3000,http://localhost:9000
+       
        AWS_ACCESS_KEY_ID=your-value-here
        AWS_SECRET_ACCESS_KEY=your-value-here
        AWS_REGION=your-value-here
@@ -52,16 +49,15 @@ app code resides in the `/client` folder.
        AWS_CF_PRIVATE_KEY=-----BEGIN RSA PRIVATE KEY-----\nyada\nyada\nyada\n-----END RSA PRIVATE KEY-----
        AWS_CF_DISTRIBUTION_ID=your-value-here
        
-1. Create development and test databases, and modify the `/config/database.yml`
-   file to suit. Then run:
+1. Install the `foreman` gem. We will need this gem to run the project.
    
-       $ foreman run rake db:migrate
+       $ gem install foreman
        
 1. Set up the client app for development (see `/client/README`)
 
 ## Running the Project
 
-Running means starting both the server API (on port 3001) as well as the client 
+Running means starting both the server API (on port 5000) as well as the client 
 app (on port 3000).
 
 * To run the project:
@@ -70,7 +66,10 @@ app (on port 3000).
 
 * To run Rails console:
 
-      $ foreman run rails console
+      $ rails console
+      
+_NOTE: Rails console will not have access to the environment variables defined
+in `.env`, so don't use it to do stuff that relies on their being available!_
 
 If you are using RubyMine, create a run configuration for the app to be able to
 use the IDE for running and debugging:

@@ -10,7 +10,11 @@
 # provided via a comma separated (no spaces) list in `config/secrets.yml`.
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins *Rails.application.secrets.client_app_base_urls.split(',')
+    allowed_origins = Rails.env.production? ?
+        Rails.application.secrets.client_app_base_urls :
+        '*'
+
+    origins *allowed_origins.split(',')
 
     resource '*',
       headers: :any,
