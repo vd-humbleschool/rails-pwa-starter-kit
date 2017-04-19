@@ -1,13 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { inject, observer } from 'mobx-react';
-
 import compose from 'lodash/fp/compose';
 
-import List from 'react-toolbox/lib/list/List';
-import ListItem from 'react-toolbox/lib/list/ListItem';
-import NavDrawer from 'react-toolbox/lib/layout/NavDrawer';
+import Anchor from 'grommet/components/Anchor';
+import Header from 'grommet/components/Header';
+import Menu from 'grommet/components/Menu';
+import Sidebar from 'grommet/components/Sidebar';
+import Title from 'grommet/components/Title';
+
+import mobxify from './mobxify';
 
 function MainNavDrawer({ history, uiStore }) {
   function closeDrawerAndNavigateTo(path) {
@@ -16,30 +18,25 @@ function MainNavDrawer({ history, uiStore }) {
   }
 
   return (
-    <NavDrawer
-      active={uiStore.isMainNavDrawerActive}
-      permanentAt="xxxl"
-      onOverlayClick={uiStore.toggleMainNavDrawerActive}>
-      <List selectable>
-        <ListItem
-          leftIcon="home"
-          caption="Home"
-          onClick={() => closeDrawerAndNavigateTo('/')}
-        />
-        <ListItem
-          leftIcon="message"
-          caption="Posts"
-          onClick={() => closeDrawerAndNavigateTo('/posts')}
-        />
-      </List>
-    </NavDrawer>
+    <Sidebar size="small" pad="small" colorIndex="neutral-1">
+      <Header>
+        <Title>Menu</Title>
+      </Header>
+      <Menu>
+        <Anchor onClick={() => closeDrawerAndNavigateTo('/')}>
+          Home
+        </Anchor>
+        <Anchor onClick={() => closeDrawerAndNavigateTo('/posts')}>
+          Posts
+        </Anchor>
+      </Menu>
+    </Sidebar>
   );
 }
 
 const hoc = compose(
   withRouter,
-  inject('uiStore'),
-  observer
+  mobxify('uiStore')
 );
 
 export default hoc(MainNavDrawer);

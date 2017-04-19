@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
-import { inject, observer } from 'mobx-react';
+import Article from 'grommet/components/Article';
+import Heading from 'grommet/components/Heading';
+import List from 'grommet/components/List';
+import ListItem from 'grommet/components/ListItem';
+import Section from 'grommet/components/Section';
 
 import compose from 'lodash/fp/compose';
 import map from 'lodash/fp/map';
 
-import List from 'react-toolbox/lib/list/List';
-import ListItem from 'react-toolbox/lib/list/ListItem';
+import mobxify from './mobxify';
 
 class Posts extends Component {
   constructor(props) {
@@ -21,26 +24,22 @@ class Posts extends Component {
 
   postItemUi(post) {
     return (
-      <ListItem
-        key={`${post.id}`}
-        avatar="http://mattsawyers.com/wp-content/uploads/2013/12/camera.png"
-        caption={post.title}
-      />
+      <ListItem key={`${post.id}`}>{post.title}</ListItem>
     );
   }
 
   render() {
     return (
-      <List selectable>
-        {map(this.postItemUi)(this.postsStore.posts)}
-      </List>
+      <Article>
+        <Section>
+          <Heading>Posts</Heading>
+          <List>
+            {map(this.postItemUi)(this.postsStore.posts)}
+          </List>
+        </Section>
+      </Article>
     );
   }
 }
 
-const hoc = compose(
-  inject('postsStore'),
-  observer
-);
-
-export default hoc(Posts);
+export default mobxify('postsStore')(Posts);
