@@ -47,7 +47,7 @@ app code resides in the `/client` folder.
        AWS_S3_BUCKET_NAME=your-value-here
        AWS_CF_KEY_PAIR_ID=your-value-here
        AWS_CF_PRIVATE_KEY=-----BEGIN RSA PRIVATE KEY-----\nyada\nyada\nyada\n-----END RSA PRIVATE KEY-----
-       AWS_CF_DISTRIBUTION_ID=your-value-here
+       AWS_CF_DISTRIBUTION_DOMAIN_NAME=your-value-here
        
 1. Install the `foreman` gem. We will need this gem to run the project.
    

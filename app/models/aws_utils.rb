@@ -5,7 +5,7 @@ class AwsUtils
           private_key: Rails.application.secrets.aws_cf_private_key.gsub('\n', "\n")
       )
 
-  CF_DISTRIBUTION_URL = "https://#{Rails.application.secrets.aws_cf_distribution_id}.cloudfront.net"
+  CF_DISTRIBUTION_URL = "https://#{Rails.application.secrets.aws_cf_distribution_domain_name}"
 
   def self.cf_signed_url (s3_object_key, expires_in = 24.hours)
     raw_object_url = "#{CF_DISTRIBUTION_URL}#{URI.encode(s3_object_key)}"

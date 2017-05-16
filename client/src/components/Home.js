@@ -1,18 +1,13 @@
 import React from 'react';
-
-import Article from 'grommet/components/Article';
-import Heading from 'grommet/components/Heading';
-import Paragraph from 'grommet/components/Paragraph';
-import Section from 'grommet/components/Section';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <Article>
-      <Section>
-        <Heading>Welcome!</Heading>
-        <Paragraph>This is the Rails PWA Starter Kit</Paragraph>
-      </Section>
-    </Article>
+    <div>
+      <Link to="/posts">Posts</Link>
+      <h1>Home</h1>
+      <p>This is a Rails PWA Starter Kit</p>
+    </div>
   );
 }
 

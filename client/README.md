@@ -21,6 +21,11 @@ developed separately with no consequences.
    
        $ yarn install
        
+   _NOTE: When running via `npm start`, if you face an error that looks like
+   '... node_sass/vendor directory not found ...', run `npm rebuild node-sass` 
+   to hopefully fix this problem. You may need to run this every time you run a
+   yarn command.
+       
 1. Create a `.env` file in the client app root folder, with the following 
    environment variables:
    
@@ -48,7 +53,7 @@ generated into the same `/build` folder in each case!
 To build a deployment ready app:
 
 1. Create `.env.deploy` and provide desired values for environment variables
-1. `$ yarn run build:deploy`
+1. `$ npm run build:deploy`
 
 ## Deploying the App
 

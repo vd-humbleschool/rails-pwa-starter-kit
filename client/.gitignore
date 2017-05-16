@@ -22,3 +22,6 @@ yarn-error.log*
 # versions: The standard `.env` for development; and specialized `.env.XXX`
 # files for different production scenarios. For details, see the README.
 .env.*
+
+# Ignore all source `.css` files, since we are using Sass
+/src/**/*.css

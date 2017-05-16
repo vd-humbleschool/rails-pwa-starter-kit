@@ -3,10 +3,14 @@ import { action, extendObservable } from 'mobx';
 class UiStore {
   constructor() {
     extendObservable(this, {
-      isMainNavDrawerActive: false,
+      isMainNavActive: false,
 
-      toggleMainNavDrawerActive: action(() => {
-        this.isMainNavDrawerActive = !this.isMainNavDrawerActive;
+      setMainNavActive: action((isActive) => {
+        this.isMainNavActive = isActive;
+      }),
+
+      toggleMainNavActive: action(() => {
+        this.setMainNavActive(!this.isMainNavActive);
       })
     });
   }

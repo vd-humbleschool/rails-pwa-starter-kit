@@ -1,5 +1,4 @@
 import { inject, observer } from 'mobx-react';
-
 import compose from 'lodash/fp/compose';
 
 function mobxify(...stores) {
