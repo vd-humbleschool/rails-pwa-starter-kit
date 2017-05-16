@@ -5,23 +5,43 @@ import { apiEndpoint } from '../ApiUtils';
 class PostsStore {
   constructor() {
     extendObservable(this, {
+      // Posts
       posts: [],
-      isFetching: false,
-      fetchError: null,
+      isFetchingPosts: false,
+      postsFetchError: null,
+      // Single post
+      post: null,
+      isFetchingPost: false,
+      postFetchError: null,
 
       fetchPosts: action(() => {
-        this.isFetching = true;
+        this.isFetchingPosts = true;
 
         fetch(apiEndpoint('/posts')).then((response) => {
           return response.json();
         }).then((json) => {
           this.posts = json;
-          this.fetchError = null;
+          this.postsFetchError = null;
         }).catch((error) => {
-          this.fetchError = error;
+          this.postsFetchError = error;
         }).then(() => {
-          this.isFetching = false;
+          this.isFetchingPosts = false;
         });
+      }),
+
+      fetchPost: action((id) => {
+        this.isFetchingPost = true;
+
+        fetch(apiEndpoint(`/posts/${id}`)).then((response) => {
+          return response.json();
+        }).then((json) => {
+          this.post = json;
+          this.postFetchError = null;
+        }).catch((error) => {
+          this.postFetchError = error;
+        }).then(() => {
+          this.isFetchingPost = false;
+        })
       })
     });
   }

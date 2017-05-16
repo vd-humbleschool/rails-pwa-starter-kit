@@ -1,20 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-
 import { Provider as StoreProvider } from 'mobx-react';
+
 import postsStore from './stores/postsStore';
 import uiStore from './stores/uiStore';
 
-import AppMeat from './components/AppMeat';
+import MainLayout from './components/MainLayout';
+
+import '../fonts/font-awesome-optimized/style.css';
+
+import './App.css';
 
 const stores = { postsStore, uiStore };
 
 function App() {
   return (
     <StoreProvider {...stores}>
-      <Router>
-        <AppMeat />
-      </Router>
+      <MainLayout />
     </StoreProvider>
   );
 }

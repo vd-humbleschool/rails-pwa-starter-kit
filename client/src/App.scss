@@ -1,0 +1,10 @@
+// These two need to be imported, no matter what
+@import "../node_modules/bulma/sass/utilities/all";
+@import "../node_modules/bulma/sass/base/all";
+
+// Import only the functionality we need, and no more
+@import "../node_modules/bulma/sass/components/nav";
+@import "../node_modules/bulma/sass/elements/icon";
+@import "../node_modules/bulma/sass/elements/other";
+@import "../node_modules/bulma/sass/elements/title";
+@import "../node_modules/bulma/sass/layout/section";
